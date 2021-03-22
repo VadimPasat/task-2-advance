@@ -9,14 +9,13 @@ pipeline {
                 parameters {
                     string(name: 'duration', defaultValue: '120')
                     string(name: 'users', defaultValue: '10')
-                    string(name: 'rampUp', defaultValue: '2')
                 }
             }
             steps {
                 echo 'Starting test with Jmeter'
                 bat """
                  CALL C:\\apache-jmeter-5.4.1\\bin\\JmeteLaunch.bat.bat ^
-                    -Jduration=${duration} -Jusers=${users} -jrampUp=${rampUp} -Jjmeterengine.force.system.exit=true
+                    -Jduration=${duration} -Jusers=${users} -Jjmeterengine.force.system.exit=true
                 """
                 echo 'Test completed'
             }
