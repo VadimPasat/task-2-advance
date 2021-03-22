@@ -23,6 +23,7 @@
         }
 	stage('HTML Rapoert'){
         steps {
+            publishHtml {
             report('build/test-output') {
                 reportName('Test Output')
             }
