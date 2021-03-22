@@ -2,13 +2,13 @@
 pipeline {
     agent any
     stages {
-        stage ('Run Jmeter Load Test') {
+        stage ('Run Load Test') {
 			input {
                 message "please enter values"
                 ok "Ok"
                 submitter "no matter"
                 parameters {
-                    string(name: 'duration', defaultValue: '20')
+                    string(name: 'duration', defaultValue: '120')
                     string(name: 'users', defaultValue: '10')
                     string(name: 'rampUp', defaultValue: '2')
                 }
@@ -21,24 +21,8 @@ pipeline {
                 """
                 echo 'Test completed'
 		
-		sh 'ls target/jmeter/reports > listFiles.txt'
-               step{ def files = readFile("listFiles.txt").split("\\r?\\n");
-                sh 'rm -f listFiles.txt'
-		}
-step{
-                for (i = 0; i < files.size(); i++) {
-                    publishHTML target: [
-                        allowMissing:false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll:true,
-                        reportDir: 'target/jmeter/reports/' + files[i],
-                        reportFiles: 'index.html',
-                        reportName: files[i]
-                    ]
-		    }
-	  
+		publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: ‘coverage’, reportFiles: ‘index.html’, reportName: ‘HTML Report’, reportTitles: ‘Coverage Report’])
             }
         }
     }
-}
 }
