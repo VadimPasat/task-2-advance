@@ -35,7 +35,7 @@ pipeline {
             allowMissing: false,
             alwaysLinkToLastBuild: false,
             keepAll: true,
-            reportDir: 'C:\NewPerformanceTask\Raport\HTML',
+            reportDir: 'C:\\NewPerformanceTask\\Raport\\HTML',
             reportFiles: 'index.html',
             reportName: 'RCov Report'
           ]
