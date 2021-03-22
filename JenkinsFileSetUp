@@ -22,8 +22,7 @@
             }
         }
 	stage('HTML Rapoert'){
-	publishers {
-        publishHtml {
+        step {
             report('build/test-output') {
                 reportName('Test Output')
             }
