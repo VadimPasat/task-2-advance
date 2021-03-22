@@ -22,7 +22,7 @@
             }
         }
 	stage('HTML Rapoert'){
-        step {
+        steps {
             report('build/test-output') {
                 reportName('Test Output')
             }
