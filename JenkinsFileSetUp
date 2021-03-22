@@ -18,9 +18,21 @@
                  CALL C:\\apache-jmeter-5.4.1\\bin\\jmeter.bat -n -t C:\\NewPerformanceTask\\EdidtedNewJmeterscript.jmx ^
                     -Jduration=${duration} -Jusers=${users} -jrampUp=${rampUp} -Jjmeterengine.force.system.exit=true
                 """
-		-report
                 echo 'Test completed'
             }
         }
+	publishers {
+        publishHtml {
+            report('build/test-output') {
+                reportName('Test Output')
+            }
+            report('test') {
+                reportName('Gradle Tests')
+                keepAll()
+                allowMissing()
+                alwaysLinkToLastBuild()
+            }
+        }
+    }
     }
 }
