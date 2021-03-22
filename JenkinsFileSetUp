@@ -21,24 +21,19 @@ pipeline {
                 """
                 echo 'Test completed'
 		
-		// install required gems
-        sh 'bundle install'
+		sh 'ls target/jmeter/reports > listFiles.txt'
+                def files = readFile("listFiles.txt").split("\\r?\\n");
+                sh 'rm -f listFiles.txt'
 
-        // build and run tests with coverage
-        sh 'bundle exec rake build spec'
-
-        // Archive the built artifacts
-        archive includes: 'pkg/*.gem'
-
-        // publish html
-        publishHTML target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: 'C:\\NewPerformanceTask\\Raport\\HTML',
-            reportFiles: 'index.html',
-            reportName: 'RCov Report'
-          ]
+                for (i = 0; i < files.size(); i++) {
+                    publishHTML target: [
+                        allowMissing:false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll:true,
+                        reportDir: 'target/jmeter/reports/' + files[i],
+                        reportFiles: 'index.html',
+                        reportName: files[i]
+                    ]
 	  
             }
         }
