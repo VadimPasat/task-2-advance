@@ -20,6 +20,15 @@ pipeline {
                     -Jduration=${duration} -Jusers=${users} -jrampUp=${rampUp} -Jjmeterengine.force.system.exit=true
                 """
                 echo 'Test completed'
+		
+		publishHTML target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: 'coverage',
+            reportFiles: 'index.html',
+            reportName: 'RCov Report'
+          ]
             }
         }
     }
