@@ -23,17 +23,9 @@
         }
 	stage('HTML Rapoert'){
         steps {
-            publishHtml {
-            report('build/test-output') {
-                reportName('Test Output')
-            }
-            report('test') {
-                reportName('Gradle Tests')
-                keepAll()
-                allowMissing()
-                alwaysLinkToLastBuild()
-            }
-        }
+           --reporters cli,junit,htmlextra \
+--reporter-junit-export "newman/report.xml" \
+--reporter-htmlextra-export "newman/report.html"
     }
     }
     }
