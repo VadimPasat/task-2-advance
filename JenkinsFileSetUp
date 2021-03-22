@@ -21,6 +21,7 @@
                 echo 'Test completed'
             }
         }
+	stage('HTML Rapoert'){
 	publishers {
         publishHtml {
             report('build/test-output') {
@@ -33,6 +34,7 @@
                 alwaysLinkToLastBuild()
             }
         }
+    }
     }
     }
 }
