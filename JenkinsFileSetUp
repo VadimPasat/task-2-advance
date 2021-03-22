@@ -2,7 +2,7 @@
 pipeline {
     agent any
     stages {
-        stage ('Run Load Test') {
+        stage ('Run Jmeter Load Test') {
 			input {
                 message "please enter values"
                 ok "Ok"
