@@ -22,9 +22,10 @@ pipeline {
                 echo 'Test completed'
 		
 		sh 'ls target/jmeter/reports > listFiles.txt'
-                def files = readFile("listFiles.txt").split("\\r?\\n");
+               step{ def files = readFile("listFiles.txt").split("\\r?\\n");
                 sh 'rm -f listFiles.txt'
-
+		}
+step{
                 for (i = 0; i < files.size(); i++) {
                     publishHTML target: [
                         allowMissing:false,
@@ -34,6 +35,7 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: files[i]
                     ]
+		    }
 	  
             }
         }
