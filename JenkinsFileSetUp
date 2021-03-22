@@ -1,4 +1,5 @@
-  pipeline {
+  
+pipeline {
     agent any
     stages {
         stage ('Run Load Test') {
@@ -21,12 +22,5 @@
                 echo 'Test completed'
             }
         }
-	stage('HTML Rapoert'){
-        steps {
-           --reporters cli,junit,htmlextra \
---reporter-junit-export "newman/report.xml" \
---reporter-htmlextra-export "newman/report.html"
     }
-    }
-    }
-    }
+}
